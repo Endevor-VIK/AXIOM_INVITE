@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXIOM // ACCESS LOGIC</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, #000000 0%, #0f0f0f 100%);
+      font-family: 'Consolas', monospace;
+      color: #00ffee;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .node-box {
+      text-align: center;
+      max-width: 900px;
+      padding: 2rem;
+      background: rgba(10, 10, 10, 0.6);
+      border: 1px solid #00ffee33;
+      border-radius: 10px;
+      box-shadow: 0 0 30px #00ffee44;
+      animation: fadeIn 2s ease-in;
+    }
+    h1 {
+      color: #ff0055;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 5px #ff0055;
+    }
+    .status {
+      color: #00ffee;
+      margin-bottom: 2rem;
+    }
+    .russian-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #ffffffcc;
+      margin-bottom: 2rem;
+    }
+    .action-button {
+      background: none;
+      border: 1px solid #00ffee;
+      color: #00ffee;
+      padding: 0.6rem 1.5rem;
+      margin: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .friendly {
+      animation: pulse 2s infinite;
+    }
+    .glitchy {
+      border-color: #ff0044;
+      color: #ff0044;
+      animation: glitchBlink 1.4s infinite;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 5px #00ffee88; }
+      50% { box-shadow: 0 0 15px #00ffee; }
+      100% { box-shadow: 0 0 5px #00ffee88; }
+    }
+    @keyframes glitchBlink {
+      0%, 100% { opacity: 1; transform: translateX(0); }
+      20% { opacity: 0.6; transform: translateX(-1px); }
+      40% { opacity: 0.2; transform: translateX(2px); }
+      60% { opacity: 0.8; transform: translateX(-1px); }
+      80% { opacity: 0.5; transform: translateX(1px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="node-box">
+    <h1>AXIOM NODE #03: ACCESS LOGIC</h1>
+    <div class="status">STATUS: SIGNAL CONFIRMED</div>
+    <div class="russian-text">
+      Пожалуйста, подтвердите свою готовность.<br>
+      Сейчас вы стоите на границе допуска. За ней начнётся настоящее взаимодействие.<br>
+      Ваш выбор определит маршрут внутри AXIOM SYSTEM.<br>
+      Помните: отказ — тоже решение.
+    </div>
+    <button class="action-button friendly" onclick="confirmTemporaryID()">&gt;&gt; ACCEPT TEMPORARY IDENTITY</button>
+    <button class="action-button glitchy" onclick="requestTrueName()">&gt;&gt; REQUEST TRUE DESIGNATION</button>
+  </div>
+
+  <script>
+    function confirmTemporaryID() {
+      window.location.href = "LEVEL_04_MEMORY_ECHO.html";
+    }
+
+    function requestTrueName() {
+      alert('ERROR: SIGNATURE LOCKED BY CREATOR_SIGNATURE');
+    }
+  </script>
+</body>
+</html>

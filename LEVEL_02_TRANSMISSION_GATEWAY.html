@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXIOM // TRANSMISSION GATEWAY</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at center, #060606 0%, #000000 100%);
+      color: #00ffee;
+      font-family: 'Consolas', monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      text-align: center;
+      max-width: 800px;
+      padding: 2rem;
+      border: 1px solid #00ffee33;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 20px #00ffee33;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 2s ease, transform 1.5s ease;
+    }
+    .container.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #ff0055;
+      text-shadow: 0 0 5px #ff0055;
+      margin-bottom: 1.5rem;
+    }
+    .glitch-text {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #00ffee;
+      animation: flicker 3s infinite;
+    }
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+    .confirm-button {
+      margin-top: 2rem;
+      background: none;
+      border: 1px solid #00ffee;
+      padding: 0.6rem 1.5rem;
+      color: #00ffee;
+      cursor: pointer;
+      font-size: 1rem;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .confirm-button:hover {
+      background: #00ffee22;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="transmissionBox">
+    <h1>AXIOM SYSTEM // TRANSMISSION GATEWAY</h1>
+    <div class="glitch-text">
+      CONNECTION ESTABLISHED.<br>
+      STREAM ID: #2920-AXM.<br>
+      <br>
+      ACCESS TYPE: PARTIAL PROTOCOL OVERRIDE.<br>
+      <br>
+      >> You have entered the unstable zone of AXIOM.<br>
+      >> This environment is not fully synchronized.<br>
+      >> Further access requires multi-node confirmation.<br>
+    </div>
+    <button class="confirm-button" onclick="proceedDeeper()">PROCEED DEEPER</button>
+  </div>
+
+  <script>
+    function proceedDeeper() {
+      window.location.href = "LEVEL_03_ACCESS_LOGIC.html";
+    }
+
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById("transmissionBox").classList.add("visible");
+      }, 500); // задержка перед появлением
+    };
+  </script>
+</body>
+</html>

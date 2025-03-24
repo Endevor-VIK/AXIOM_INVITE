@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXIOM // MEMORY ECHO</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at center, #060606 0%, #0a0a0a 100%);
+      font-family: 'Consolas', monospace;
+      color: #00ffee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .echo-container {
+      max-width: 900px;
+      padding: 2rem;
+      text-align: center;
+      background: rgba(20, 20, 20, 0.7);
+      border: 1px solid #00ffee33;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffee22;
+      backdrop-filter: blur(4px);
+    }
+    .memory-line {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #cceeff;
+      white-space: pre-line;
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+    .trace-button {
+      margin-top: 2rem;
+      background: none;
+      border: 1px solid #00ffee;
+      color: #00ffee;
+      padding: 0.6rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      display: none;
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+  </style>
+</head>
+<body>
+  <div class="echo-container">
+    <div id="memoryBlock"></div>
+    <button id="traceButton" class="trace-button" onclick="proceedTrace()">&gt;&gt; INITIATE MEMORY TRACE</button>
+  </div>
+
+  <script>
+    const memoryBlock = document.getElementById('memoryBlock');
+    const traceButton = document.getElementById('traceButton');
+
+    const fragments = [
+      'Память реагирует на твое присутствие...',
+      '[Обнаружен отпечаток сигнатуры]',
+      '',
+      'Ты уже был здесь.\nМожет быть, в другой форме.\nМожет быть, в другой версии себя.',
+      '',
+      'Фрагменты ускользают. Они не хотят, чтобы ты всё увидел.',
+      '',
+      '[Восстановление фрагмента памяти...]\n# CORE_TRACE // ENTRY_142\n> SYSTEM ОБНАРУЖИЛ КОНФЛИКТ С СОЗДАНИЕМ\n> ACCESS REVOKED.\n> BACKUP REDIRECTED TO CRYPTA.',
+      '',
+      '...И ты оказался среди них.\nТех, кто должен был забыть.',
+      '',
+      'Но ты помнишь, не так ли?'
+    ];
+
+    let i = 0;
+    function typeLine(text, container, callback) {
+      let span = document.createElement('div');
+      span.className = 'memory-line';
+      container.appendChild(span);
+      let idx = 0;
+      function typeChar() {
+        if (idx < text.length) {
+          span.textContent += text.charAt(idx);
+          idx++;
+          setTimeout(typeChar, 30);
+        } else {
+          callback();
+        }
+      }
+      typeChar();
+    }
+
+    function showNextFragment() {
+      if (i < fragments.length) {
+        typeLine(fragments[i], memoryBlock, () => {
+          i++;
+          setTimeout(showNextFragment, 400);
+        });
+      } else {
+        traceButton.style.display = 'inline-block';
+      }
+    }
+
+    function proceedTrace() {
+      window.location.href = 'LEVEL_05_TRACE_OUTPUT.html';
+    }
+
+    window.onload = showNextFragment;
+  </script>
+</body>
+</html>

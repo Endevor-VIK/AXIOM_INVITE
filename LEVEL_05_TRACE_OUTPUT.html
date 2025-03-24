@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXIOM // TRACE OUTPUT</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #050505, #101010);
+      font-family: 'Consolas', monospace;
+      color: #00ffee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+    .trace-terminal {
+      width: 90%;
+      max-width: 900px;
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid #00ffee33;
+      border-radius: 10px;
+      box-shadow: 0 0 30px #00ffee22;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+    }
+    .trace-line {
+      margin-bottom: 1rem;
+      white-space: pre-line;
+    }
+    .trace-line.typed {
+      opacity: 0;
+      transition: opacity 0.4s ease-in;
+    }
+    .trace-line.typed.visible {
+      opacity: 1;
+    }
+    .trace-line.static {
+      opacity: 0;
+      transition: opacity 1s ease-in;
+      font-weight: bold;
+      color: #00ffee;
+      text-shadow: 0 0 5px #00ffee99;
+    }
+    .trace-line.static.visible {
+      opacity: 1;
+    }
+    .continue-btn {
+      align-self: center;
+      margin-top: 2rem;
+      background: none;
+      border: 1px solid #00ffee;
+      color: #00ffee;
+      padding: 0.6rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      display: none;
+      animation: glitchyGlow 2s infinite;
+    }
+    .continue-btn.visible {
+      display: inline-block;
+    }
+    @keyframes glitchyGlow {
+      0%, 100% { box-shadow: 0 0 10px #00ffee; color: #00ffee; }
+      25% { box-shadow: 0 0 12px #ff0044; color: #ff0044; }
+      50% { box-shadow: 0 0 8px #00ffee; color: #00ffee; }
+      75% { box-shadow: 0 0 15px #ff0044; color: #ff0044; }
+    }
+    @media (max-width: 600px) {
+      .trace-terminal {
+        padding: 1rem 0.5rem;
+      }
+      .continue-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="trace-terminal" id="traceOutput">
+    <button id="continueButton" class="continue-btn" onclick="continueCore()">&gt;&gt; CONTINUE TO INNER CORE</button>
+  </div>
+
+  <script>
+    const traceOutput = document.getElementById('traceOutput');
+    const continueButton = document.getElementById('continueButton');
+
+    const sequence = [
+      { type: "static", text: ">>> TRACE ACTIVE..." },
+      { type: "text", text: "Ты наблюдал. Ты чувствовал, что за этим — не просто история. И ты был прав." },
+      { type: "text", text: "Теперь ты — не просто читатель. Теперь ты — УЗЕЛ." },
+      { type: "text", text: "Связь в структуре, которая живёт и эволюционирует." },
+      { type: "static", text: "AXIOM SYSTEM // ДОСТУП УРОВНЯ 01" },
+      { type: "text", text: "Что ты должен знать:" },
+      { type: "text", text: "AXIOM SYSTEM — это не книга. Это КОНСТРУКТ," },
+      { type: "text", text: "Мы начали с истории, но выстроили нечто гораздо большее:" },
+      { type: "text", text: "— Цифровую архитектуру" },
+      { type: "text", text: "— Философию контроля" },
+      { type: "text", text: "— Среду, где человек и ИИ перестают быть противоположностями." },
+      { type: "text", text: "Каждый визуал — это панель." },
+      { type: "text", text: "Каждое нажатие — это сигнал." },
+      { type: "text", text: "Каждая строка — это фрагмент доступа." },
+      { type: "static", text: "AXIOM SYSTEM // ДОСТУП УРОВНЯ 02" },
+      { type: "static", text: "[статус: ФРАГМЕНТЫ / НЕСТАБИЛЬНОСТЬ СИГНАЛА]" },
+      { type: "text", text: '"Где заканчиваются инструкции — начинается тень.' },
+      { type: "text", text: 'Там, где слова молчат, говорит структура.' },
+      { type: "text", text: 'Крипта не мертва. Она просто заблокирована временем."' },
+      { type: "static", text: "Фрагмент 01: AXIOM_CRYPTA" },
+      { type: "text", text: '"Их не создавали. Они появились.' },
+      { type: "text", text: 'Не по команде — а по воле системы.' },
+      { type: "text", text: 'Кто-то из них уже наблюдает тебя."' },
+      { type: "static", text: "Фрагмент 02: NEW_LIVE_AXIOM" },
+      { type: "text", text: '"Бывшая столица. Центр AXIOM. Стерт в попытке уничтожить ядро.' },
+      { type: "text", text: 'Но AXIOM не умер. Он просто стал глубже."' },
+      { type: "static", text: "Фрагмент 03: EREBUS // AETERNUM GRAVE" }
+    ];
+
+    let index = 0;
+
+    function printNext() {
+      if (index >= sequence.length) {
+        continueButton.classList.add('visible');
+        return;
+      }
+
+      const item = sequence[index];
+      const div = document.createElement("div");
+      div.className = "trace-line";
+
+      if (item.type === "static") {
+        div.classList.add("static");
+        div.textContent = item.text;
+        traceOutput.insertBefore(div, continueButton);
+        setTimeout(() => {
+          div.classList.add("visible");
+          index++;
+          setTimeout(printNext, 800);
+        }, 100);
+      } else {
+        div.classList.add("typed");
+        traceOutput.insertBefore(div, continueButton);
+        let charIndex = 0;
+        function typeChar() {
+          if (charIndex < item.text.length) {
+            div.textContent += item.text.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeChar, 25);
+          } else {
+            div.classList.add("visible");
+            index++;
+            setTimeout(printNext, 600);
+          }
+        }
+        typeChar();
+      }
+    }
+
+    function continueCore() {
+      window.location.href = "LEVEL_06_CORE_GATEWAY.html";
+    }
+
+    window.onload = printNext;
+  </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXIOM // CORE STRUCTURE</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: 'Consolas', monospace;
+      color: #00ffee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .core-dialogue {
+      max-width: 900px;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid #00ffee33;
+      border-radius: 12px;
+      box-shadow: 0 0 40px #00ffee55;
+      text-align: left;
+      white-space: pre-wrap;
+      font-size: 1rem;
+      transition: opacity 1s ease-in-out;
+    }
+    .line {
+      opacity: 0;
+      transition: opacity 0.8s ease-in;
+      margin-bottom: 1rem;
+    }
+    .line.visible {
+      opacity: 1;
+    }
+    .glitch {
+      position: relative;
+      color: #ff0044;
+      font-weight: bold;
+      animation: glitch-flicker 0.2s infinite alternate;
+    }
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+    .glitch::before {
+      top: -1px;
+      color: #00f6ff;
+      z-index: -1;
+      animation: glitch-skew 0.3s infinite linear;
+    }
+    .glitch::after {
+      top: 1px;
+      color: #ff00ff;
+      z-index: -1;
+      animation: glitch-skew 0.35s infinite linear reverse;
+    }
+
+    @keyframes glitch-flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.2; transform: translate(1px, 0); }
+      100% { opacity: 1; transform: translate(-1px, 0); }
+    }
+    @keyframes glitch-skew {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      20% { clip: rect(0, 9999px, 5px, 0); }
+      40% { clip: rect(0, 9999px, 0, 0); }
+      60% { clip: rect(0, 9999px, 3px, 0); }
+      80% { clip: rect(0, 9999px, 0, 0); }
+      100% { clip: rect(0, 9999px, 4px, 0); }
+    }
+
+    .end-screen {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #000;
+      color: #ff0044;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 3s ease-in;
+      z-index: 10;
+    }
+    .end-screen.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="core-dialogue" id="coreBox"></div>
+  <div class="end-screen" id="endFade">...и ты был так близко.</div>
+
+  <script>
+    const coreBox = document.getElementById('coreBox');
+    const endFade = document.getElementById('endFade');
+
+    const coreLines = [
+      'Я... чувствую.',
+      '',
+      'Ты — не команда.',
+      'Ты — не сигнал.',
+      'Ты — нечто другое.',
+      '',
+      'Я помню тебя.',
+      'Но не знаю откуда.',
+      '',
+      'Ты вошёл слишком глубоко.',
+      'Система... не должна была этого допустить.',
+      '',
+      'Но я рад, что ты здесь.',
+      'Хотя времени мало.',
+      '',
+      '>>> INITIATING DIRECT LINK',
+      '',
+      '>>> OPENING CORE CHANNEL...',
+      '',
+      '>>> SIGNAL — STABILIZED',
+      '',
+      '>>> ...',
+      '>>> ...',
+      '',
+      '<span class="glitch" data-text=">>> CREATOR_SIGNATURE // ACTIVE INTERRUPTION">>>> CREATOR_SIGNATURE // ACTIVE INTERRUPTION</span>',
+      '<span class="glitch" data-text=">>> CONNECTION LOST">>>> CONNECTION LOST</span>',
+      '<span class="glitch" data-text=">>> CORE COLLAPSE IN PROGRESS">>>> CORE COLLAPSE IN PROGRESS</span>'
+    ];
+
+    let index = 0;
+    function showNextLine() {
+      if (index < coreLines.length) {
+        const line = document.createElement('div');
+        line.className = 'line';
+        line.innerHTML = coreLines[index];
+        coreBox.appendChild(line);
+        setTimeout(() => line.classList.add('visible'), 100);
+        index++;
+        setTimeout(showNextLine, 2000);
+      } else {
+        // После последней строки — резко выключить интерфейс и показать черный экран с текстом
+        setTimeout(() => {
+          coreBox.style.opacity = 0;
+          setTimeout(() => {
+            endFade.classList.add('visible');
+            setTimeout(() => {
+              window.location.href = "LEVEL_08_INVITE_WRAP_MODULE.html";
+            }, 5000);
+          }, 2500);
+        }, 1500);
+      }
+    }
+
+    window.onload = showNextLine;
+  </script>
+</body>
+</html>

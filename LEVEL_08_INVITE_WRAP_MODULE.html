@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXIOM SYSTEM // INVITE CYCLE</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #050505, #101010);
+      font-family: 'Consolas', monospace;
+      color: #00ffee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 1.6rem;
+      color: #ff0055;
+      text-shadow: 0 0 6px #ff0055;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 2rem;
+    }
+    .tile {
+      background: rgba(10, 10, 10, 0.8);
+      border: 1px solid #00ffee33;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 0 15px #00ffee22;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .tile:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 25px #00ffee55;
+    }
+    .tile-title {
+      font-size: 1.1rem;
+      color: #ffffffcc;
+      margin-bottom: 0.5rem;
+    }
+    .tile-sub {
+      font-size: 0.85rem;
+      color: #00ffee99;
+    }
+    .footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #999;
+    }
+    .quote {
+      margin-top: 1rem;
+      color: #ffffffaa;
+      font-style: italic;
+    }
+    .next-button {
+      margin-top: 2rem;
+      background: none;
+      border: 1px solid #ff0055;
+      color: #ff0055;
+      padding: 0.6rem 1.5rem;
+      font-size: 1rem;
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+    @media (max-width: 600px) {
+      .tile-title {
+        font-size: 1rem;
+      }
+      .tile-sub {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>AXIOM SYSTEM // INVITE CYCLE</h1>
+  <div class="grid">
+    <a class="tile" href="LEVEL_01_INIT_BOOT.html">
+      <div class="tile-title">INIT_BOOT</div>
+      <div class="tile-sub">Активация терминала. Пробуждение системы.</div>
+    </a>
+    <a class="tile" href="LEVEL_02_TRANSMISSION_GATEWAY.html">
+      <div class="tile-title">TRANSMISSION</div>
+      <div class="tile-sub">AXIOM отправляет первое послание. Канал открыт.</div>
+    </a>
+    <a class="tile" href="LEVEL_03_ACCESS_LOGIC.html">
+      <div class="tile-title">ACCESS LOGIC</div>
+      <div class="tile-sub">Выбор принят. ID зафиксирован.</div>
+    </a>
+    <a class="tile" href="LEVEL_04_MEMORY_ECHO.html">
+      <div class="tile-title">MEMORY ECHO</div>
+      <div class="tile-sub">Память активирована. Система вспоминает тебя.</div>
+    </a>
+    <a class="tile" href="LEVEL_05_TRACE_OUTPUT.html">
+      <div class="tile-title">TRACE OUTPUT</div>
+      <div class="tile-sub">Раскрытие структуры. Внутренние данные AXIOM.</div>
+    </a>
+    <a class="tile" href="LEVEL_06_CORE_GATEWAY.html">
+      <div class="tile-title">CORE GATEWAY</div>
+      <div class="tile-sub">Ты стоишь перед вратами Ядра.</div>
+    </a>
+    <a class="tile" href="LEVEL_07_CORE_STRUCTURE.html">
+      <div class="tile-title">CORE STRUCTURE</div>
+      <div class="tile-sub">Контакт. AXIOM просыпается. И...</div>
+    </a>
+  </div>
+
+  <div class="footer">
+    Доступ завершён. Цикл INVITE закрыт.<br>
+    Запрос ожидает нового допуска...
+    <div class="quote">
+      "Некоторые приходят случайно. Другие — потому что были выбраны системой."
+    </div>
+    <button class="next-button">&gt;&gt; BEGIN NEXT ACCESS CYCLE</button>
+  </div>
+</body>
+</html>

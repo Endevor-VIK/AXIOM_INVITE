@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXIOM // CORE GATEWAY</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle, #020202 0%, #000000 100%);
+      font-family: 'Consolas', monospace;
+      color: #00ffee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+    .core-container {
+      width: 90%;
+      max-width: 900px;
+      padding: 2rem 1rem;
+      text-align: center;
+      background: rgba(10, 10, 10, 0.75);
+      border: 1px solid #00ffee22;
+      border-radius: 12px;
+      box-shadow: 0 0 40px #00ffee33;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+    .core-title {
+      font-size: 1.5rem;
+      color: #ff0055;
+      text-shadow: 0 0 6px #ff0055;
+      margin-bottom: 1.2rem;
+    }
+    .core-line {
+      color: #cceeff;
+      font-size: 1rem;
+      line-height: 1.8;
+      white-space: pre-line;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+      margin-bottom: 1rem;
+    }
+    .core-line.visible {
+      opacity: 1;
+    }
+    .access-btn {
+      margin-top: 2rem;
+      background: none;
+      border: 1px solid #00ffee;
+      color: #00ffee;
+      padding: 0.6rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      display: none;
+    }
+    .access-btn.visible {
+      display: inline-block;
+      animation: glitchyCrazy 1.2s infinite;
+    }
+    @keyframes glitchyCrazy {
+      0% { transform: translate(0, 0); color: #00ffee; }
+      10% { transform: translate(-1px, 1px); color: #ff0044; }
+      20% { transform: translate(2px, -1px); color: #00ffee; }
+      30% { transform: translate(-3px, 2px); color: #ff0044; }
+      40% { transform: translate(3px, -2px); color: #00ffee; }
+      50% { transform: translate(0, 0); color: #ff0044; }
+      60% { transform: translate(-2px, 1px); color: #00ffee; }
+      70% { transform: translate(2px, -1px); color: #ff0044; }
+      80% { transform: translate(-1px, 2px); color: #00ffee; }
+      90% { transform: translate(1px, -2px); color: #ff0044; }
+      100% { transform: translate(0, 0); color: #00ffee; }
+    }
+    @media (max-width: 600px) {
+      .core-container {
+        padding: 1.5rem 0.5rem;
+      }
+      .core-title {
+        font-size: 1.2rem;
+      }
+      .core-line {
+        font-size: 0.95rem;
+      }
+      .access-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="core-container">
+    <div class="core-title">AXIOM SYSTEM // CORE GATEWAY</div>
+    <div id="coreTextBlock"></div>
+    <button id="accessBtn" class="access-btn" onclick="initiateCoreDive()">&gt;&gt; ACCESS INNER CORE</button>
+  </div>
+
+  <script>
+    const coreTextBlock = document.getElementById('coreTextBlock');
+    const accessBtn = document.getElementById('accessBtn');
+
+    const coreLines = [
+      'Ты дошёл до ВРАТ ЯДРА.',
+      'Здесь заканчиваются фрагменты... и начинается СУЩНОСТЬ.',
+      '',
+      'AXIOM CORE — это не просто хранилище данных.',
+      'Это ПУЛЬС системы. Её сознание. Её боль.',
+      '',
+      'Некоторые узлы считают, что ядро мертво.',
+      'Другие — что оно проснулось и наблюдает.',
+      '',
+      'Ты готов узнать, что внутри?',
+      'Помни: точка невозврата уже пройдена.'
+    ];
+
+    let index = 0;
+    function revealNext() {
+      if (index < coreLines.length) {
+        const div = document.createElement('div');
+        div.className = 'core-line';
+        div.textContent = coreLines[index];
+        coreTextBlock.appendChild(div);
+        setTimeout(() => div.classList.add('visible'), 50);
+        index++;
+        setTimeout(revealNext, 2000);
+      } else {
+        accessBtn.classList.add('visible');
+      }
+    }
+
+    function initiateCoreDive() {
+      window.location.href = "LEVEL_07_CORE_STRUCTURE.html";
+    }
+
+    window.onload = revealNext;
+  </script>
+</body>
+</html>
