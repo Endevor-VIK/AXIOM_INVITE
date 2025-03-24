@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AXIOM SYSTEM // STARTUP GATEWAY</title>
   <style>
     body {
@@ -13,33 +14,101 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      box-sizing: border-box;
     }
+
     h1 {
       color: #ff0055;
-      text-shadow: 0 0 6px #ff0055;
+      text-shadow: 0 0 8px #ff0055;
+      animation: pulseRed 2.5s infinite, glitchText 3s infinite;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
     }
+
+    @keyframes pulseRed {
+      0% { text-shadow: 0 0 8px #ff0055; }
+      50% { text-shadow: 0 0 18px #ff3366; }
+      100% { text-shadow: 0 0 8px #ff0055; }
+    }
+
+    @keyframes glitchText {
+      0% { transform: none; opacity: 1; }
+      20% { transform: translateX(-1px); opacity: 0.8; }
+      40% { transform: translateX(1px); opacity: 0.9; }
+      60% { transform: translateX(-2px); opacity: 0.7; }
+      80% { transform: translateX(2px); opacity: 1; }
+      100% { transform: none; opacity: 1; }
+    }
+
+    .glitch-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      color: #00ffee;
+      background: #101010;
+      border: 2px solid #00ffee;
+      border-radius: 8px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+    }
+
+    .glitch-button:hover {
+      background: #00ffee;
+      color: #000;
+      box-shadow: 0 0 15px #00ffee, 0 0 30px #ff0044;
+    }
+
+    .glitch-button::before,
+    .glitch-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, #ff0044, transparent);
+      transition: left 0.5s ease-in-out;
+    }
+
+    .glitch-button:hover::before {
+      left: 100%;
+      transition: left 0.5s ease-in-out;
+    }
+
     ul {
       list-style: none;
       padding: 0;
+      margin: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
+
     li {
-      margin: 0.8rem 0;
+      margin: 1.5rem;
     }
-    a {
-      color: #00ffee;
-      text-decoration: none;
-      font-size: 1.1rem;
-    }
-    a:hover {
-      color: #ff0055;
-      text-shadow: 0 0 4px #ff0055;
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .glitch-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
   <h1>AXIOM SYSTEM // STARTUP GATEWAY</h1>
   <ul>
-    <li><a href="LEVEL_01_INIT_BOOT.html">01 — INIT_BOOT</a></li>
+    <li><a class="glitch-button" href="LEVEL_01_INIT_BOOT.html">01 — INIT_BOOT</a></li>
   </ul>
 </body>
 </html>
