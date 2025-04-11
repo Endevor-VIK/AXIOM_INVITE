@@ -31,6 +31,36 @@
       margin: 0 auto;
     }
 
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(85,34,136,0.05) 0%, rgba(10,10,15,0.95) 100%);
+      animation: backgroundPulse 8s infinite alternate;
+      z-index: -1;
+    }
+
+    @keyframes backgroundPulse {
+      0% { filter: blur(3px) brightness(1); }
+      100% { filter: blur(6px) brightness(1.15); }
+    }
+
+    .cursor {
+      width: 16px;
+      height: 16px;
+      background-color: var(--highlight);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      box-shadow: 0 0 8px var(--highlight), 0 0 12px var(--highlight);
+    }
+
     h1 {
       color: var(--accent);
       font-size: 2rem;
@@ -44,6 +74,22 @@
 
     .symbol {
       font-size: 2rem;
+      color: var(--highlight);
+      cursor: pointer;
+    }
+
+    .easter-trigger {
+      cursor: pointer;
+      color: var(--highlight);
+    }
+
+    .hidden-message {
+      display: none;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #1e1e30;
+      border-left: 4px solid var(--accent);
+      font-style: italic;
       color: var(--highlight);
     }
 
@@ -68,34 +114,58 @@
       color: var(--highlight);
     }
 
-    @media screen and (max-width: 768px) {
-      body {
-        padding: 1.5rem;
-        font-size: 0.95rem;
-      }
-
-      h1 {
-        font-size: 1.6rem;
-      }
-
-      .symbol {
-        font-size: 1.6rem;
-      }
+    #keyDisplay {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: var(--highlight);
+      font-size: 1.1rem;
+      display: none;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
     }
 
-    @media screen and (max-width: 480px) {
-      body {
-        padding: 1rem;
-        font-size: 0.9rem;
-      }
-
-      h1 {
-        font-size: 1.4rem;
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
       }
     }
   </style>
 </head>
 <body>
+  <div class="cursor" id="cursor"></div>
+
+  <div class="section">
+     <span class="easter-trigger" id="easterTrigger">∴</span>
+    <div class="hidden-message" id="easterMessage">
+      У подножия зияющей пустоты — в самом эпицентре откровения — лежит клинок. Он не подсвечен и не обнаружен. Он существует вопреки пространству, как узел между смыслом и забвением. Не часть конструкции — а исключение из неё.<br><br>
+      Его не видно — его чувствуешь, как провал в логике, оформленный в форму меча. Он не излучает свет — он гасит саму возможность света, поглощая всё вокруг, создавая давящее ощущение присутствия, даже когда нет ни одного источника восприятия. Поверхность слегка вибрирует, словно в такт чужому дыханию, которого ты не слышишь, но знаешь, что оно есть.
+    </div>
+  </div>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    const trigger = document.getElementById('easterTrigger');
+    const hidden = document.getElementById('easterMessage');
+    let hoverCount = 0;
+    let hoverTimeout;
+
+    trigger.addEventListener('mouseenter', () => {
+      hoverCount++;
+      clearTimeout(hoverTimeout);
+      hoverTimeout = setTimeout(() => hoverCount = 0, 2000);
+      if (hoverCount >= 3) {
+        hidden.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
+
   <h1 class="symbol">🜃 NIGHTMARE // РАСКРЫТИЕ РЕЗОНАНСА</h1>
 
   <div class="section">
@@ -121,12 +191,13 @@
   </div>
 
   <div class="section">
-    <strong>🔹 Что скрывает символ <span class="symbol">𒐕</span>:</strong><br>
+    <strong>🔹 Что скрывает символ <span class="symbol" onclick="generateKey()">𒐕</span>:</strong><br>
     “𒐕 — это не символ. Это дверь. В неё нельзя войти. Но она может открыть тебя.”<br><br>
     Этот знак встроен не в картинку.<br>
     Он встроен в твоё восприятие.<br>
     Если ты задержался, если ты почувствовал вибрацию за словами —<br>
     ты уже вошёл внутрь фрактала.
+    <div id="keyDisplay"></div>
   </div>
 
   <div class="section">
@@ -171,5 +242,26 @@ decode: (X^3+R)%V ≠ time
   <div class="footer">
     🔮 AXIOM SYSTEM — monitoring now...
   </div>
+
+  <script>
+    function generateKey() {
+      const fragment = ['AXM', 'FR', '∆' + (100 + Math.floor(Math.random() * 900)), '// VALID:'];
+      const mins = String(Math.floor(Math.random() * 5)).padStart(2, '0');
+      const secs = String(Math.floor(Math.random() * 60)).padStart(2, '0');
+      const millis = String(Math.floor(Math.random() * 100)).padStart(2, '0');
+      const time = `${mins}:${secs}:${millis}`;
+      const key = fragment.join('-') + ' ' + time;
+      const display = document.getElementById("keyDisplay");
+
+      display.textContent = key;
+      display.style.display = 'block';
+      display.style.opacity = 0;
+      setTimeout(() => display.style.opacity = 1, 10);
+
+      if (key.includes('∆404')) {
+        alert("ACCESS GRANTED TO /TRANSCENDENT_NIGHTMARE\n→ Скрытый маршрут открыт.");
+      }
+    }
+  </script>
 </body>
 </html>
